@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="info.primestar.transporter"
-          android:versionCode="1" android:versionName="1.0">
+          package="info.primestar.transporter">
 
-    <uses-sdk android:minSdkVersion="14" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -19,8 +17,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo">
+
         <activity
-            android:name=".WiFiDirectActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" android:launchMode="singleTask">
             <intent-filter>
                 <action
@@ -31,7 +30,13 @@
         </activity>
 
         <!-- Used for transferring files after a successful connection -->
-        <service android:enabled="true" android:name=".FileTransferService" />
+        <service android:enabled="true" android:name=".DexTransferService" />
 
+        <service android:name="info.primestar.transporter.RemoteService"
+                 android:process=":exported">
+            <intent-filter>
+                <action android:name="info.primestar.RemoteService"/>
+            </intent-filter>
+        </service>
     </application>
 </manifest>
